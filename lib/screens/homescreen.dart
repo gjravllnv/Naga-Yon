@@ -3,7 +3,7 @@
 import 'dart:math';
 import 'package:finalproject/screens/loginscreen.dart';
 import 'package:finalproject/screens/searchscreen.dart';
-import 'package:finalproject/tab/citytab.dart';
+import 'package:finalproject/tab/province.dart';
 import 'package:finalproject/tab/parktab.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
