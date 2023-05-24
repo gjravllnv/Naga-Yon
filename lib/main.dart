@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-// import '../screens/loginscreen.dart';
+import '../screens/loginscreen.dart';
 import '../screens/homescreen.dart';
 
 void main() {
@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(fontFamily: 'Poppins'),
       debugShowCheckedModeBanner: false,
       title: "Naga'Yon",
-      home: const HomeScreen(),
+      home: const LoginScreen(),
     );
   }
 }

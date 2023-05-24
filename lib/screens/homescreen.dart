@@ -1,24 +1,17 @@
 // ignore_for_file: sized_box_for_whitespace
 
 import 'dart:math';
-import 'package:finalproject/screens/loginscreen.dart';
-import 'package:finalproject/screens/searchscreen.dart';
-
-import 'package:finalproject/tab/parktab.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+
 import '../components/colors.dart';
 import '../tab/discover.dart';
+import '../tab/parktab.dart';
 import '../tab/province.dart';
 import 'bookingscreen.dart';
-
-enum FilterType {
-  nameAscending,
-  nameDescending,
-  regioncodeAscending,
-  regioncodeDescending,
-}
+import 'loginscreen.dart';
+import 'searchscreen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -32,7 +25,6 @@ class _HomeScreenState extends State<HomeScreen>
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   List<dynamic> originalCityData = [];
   List<dynamic> cityData = [];
-  FilterType currentFilter = FilterType.nameAscending;
   late TabController _tabController;
 
   @override
@@ -88,28 +80,6 @@ class _HomeScreenState extends State<HomeScreen>
     }
   }
 
-  void filterData(FilterType filterType) {
-    setState(() {
-      currentFilter = filterType;
-      switch (filterType) {
-        case FilterType.nameAscending:
-          cityData.sort((a, b) => (a['name'] ?? '').compareTo(b['name'] ?? ''));
-          break;
-        case FilterType.nameDescending:
-          cityData.sort((a, b) => (b['name'] ?? '').compareTo(a['name'] ?? ''));
-          break;
-        case FilterType.regioncodeAscending:
-          cityData.sort((a, b) =>
-              (a['region_code'] ?? '').compareTo(b['region_code'] ?? ''));
-          break;
-        case FilterType.regioncodeDescending:
-          cityData.sort((a, b) =>
-              (b['region_code'] ?? '').compareTo(a['region_code'] ?? ''));
-          break;
-      }
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -117,7 +87,7 @@ class _HomeScreenState extends State<HomeScreen>
       key: _scaffoldKey,
       backgroundColor: Colors.white,
       body: Padding(
-        padding: const EdgeInsets.fromLTRB(16, 50, 16, 0),
+        padding: const EdgeInsets.fromLTRB(16, 50, 13, 0),
         child: Column(
           children: [
             Row(
@@ -136,8 +106,8 @@ class _HomeScreenState extends State<HomeScreen>
                     _scaffoldKey.currentState?.openEndDrawer();
                   },
                   child: Container(
-                    width: 30,
-                    height: 30,
+                    width: 40,
+                    height: 40,
                     margin: const EdgeInsets.only(right: 0.0),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(5.0),
@@ -203,45 +173,6 @@ class _HomeScreenState extends State<HomeScreen>
                       ),
                     ),
                   ),
-                  const SizedBox(width: 5),
-                  PopupMenuButton<FilterType>(
-                    onSelected: (FilterType selectedFilter) {
-                      filterData(selectedFilter);
-                    },
-                    itemBuilder: (BuildContext context) =>
-                        <PopupMenuEntry<FilterType>>[
-                      const PopupMenuItem<FilterType>(
-                        value: FilterType.nameAscending,
-                        child: Text('Name Ascending'),
-                      ),
-                      const PopupMenuItem<FilterType>(
-                        value: FilterType.nameDescending,
-                        child: Text('Name Descending'),
-                      ),
-                      const PopupMenuItem<FilterType>(
-                        value: FilterType.regioncodeAscending,
-                        child: Text('Region Code Ascending'),
-                      ),
-                      const PopupMenuItem<FilterType>(
-                        value: FilterType.regioncodeDescending,
-                        child: Text('Region Code Descending'),
-                      ),
-                    ],
-                    child: Container(
-                      padding: const EdgeInsets.all(0),
-                      width: 35,
-                      height: 35,
-                      decoration: BoxDecoration(
-                        color: Colors.grey.shade600,
-                        borderRadius: BorderRadius.circular(5),
-                      ),
-                      child: const Icon(
-                        Icons.filter_list_rounded,
-                        color: Colors.white,
-                        size: 24,
-                      ),
-                    ),
-                  ),
                 ],
               ),
             ),
@@ -297,16 +228,18 @@ class _HomeScreenState extends State<HomeScreen>
         child: ListView(
           padding: EdgeInsets.zero,
           children: [
-            const DrawerHeader(
-              decoration: BoxDecoration(
-                color: Color(0xFF027438),
+            Container(
+              decoration: const BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage('assets/images/icon.png'),
+                  fit: BoxFit.cover,
+                  opacity: 0.8,
+                ),
               ),
-              child: Text(
-                'Filters',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
+              child: const DrawerHeader(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [],
                 ),
               ),
             ),
@@ -316,7 +249,8 @@ class _HomeScreenState extends State<HomeScreen>
                 Icons.home,
                 size: 30.0,
               ),
-              title: const Text('Home',style: TextStyle( fontWeight: FontWeight.bold)),
+              title: const Text('Home',
+                  style: TextStyle(fontWeight: FontWeight.bold)),
               onTap: () {
                 Navigator.push(
                   context,
@@ -330,11 +264,15 @@ class _HomeScreenState extends State<HomeScreen>
                 Icons.menu_book_rounded,
                 size: 30.0,
               ),
-              title: const Text('Book',style: TextStyle( fontWeight: FontWeight.bold)),
+              title: const Text('Book',
+                  style: TextStyle(fontWeight: FontWeight.bold)),
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const BookScreen(destination: '',)),
+                  MaterialPageRoute(
+                      builder: (context) => const BookScreen(
+                            destination: '',
+                          )),
                 );
               },
             ),
@@ -344,7 +282,8 @@ class _HomeScreenState extends State<HomeScreen>
                 Icons.search_rounded,
                 size: 30.0,
               ),
-              title: const Text('Search', style: TextStyle( fontWeight: FontWeight.bold)),
+              title: const Text('Search',
+                  style: TextStyle(fontWeight: FontWeight.bold)),
               onTap: () {
                 Navigator.push(
                   context,
@@ -358,7 +297,8 @@ class _HomeScreenState extends State<HomeScreen>
                 Icons.logout_outlined,
                 size: 30.0,
               ),
-              title: const Text('Log out',style: TextStyle( fontWeight: FontWeight.bold)),
+              title: const Text('Log out',
+                  style: TextStyle(fontWeight: FontWeight.bold)),
               onTap: () {
                 _logout(context);
               },

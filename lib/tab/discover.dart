@@ -101,17 +101,23 @@ class DiscoverDetailsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      extendBodyBehindAppBar: true, // Make the app bar extend behind the body
       appBar: AppBar(
-        title: Text(destination),
+        title: Text(
+          destination,
+          style:
+              const TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+        ),
+        
         backgroundColor:
             Colors.transparent, // Set app bar background color to transparent
         elevation: 0, // Remove app bar elevation
         iconTheme: const IconThemeData(
             color: Colors.black), // Set the app bar icon color to black
       ),
+      resizeToAvoidBottomInset: false,
       body: Padding(
-        padding: const EdgeInsets.all(20.0),
+        
+        padding: const EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 0.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

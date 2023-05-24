@@ -1,4 +1,5 @@
-import 'package:finalproject/screens/homescreen.dart';
+// import 'package:finalproject/screens/homescreen.dart';
+// import 'package:finalproject/tab/discover.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -151,28 +152,28 @@ class _BookScreenState extends State<BookScreen> {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Align(
-                      alignment: Alignment.topLeft,
-                      child: TextButton.icon(
-                        onPressed: () {
-                          Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const HomeScreen()),
-                          );
-                        },
-                        icon: const Icon(
-                          Icons.arrow_back,
-                          color: Colors.green,
-                        ),
-                        label: const Text(
-                          'Back',
-                          style: TextStyle(
-                            color: Colors.black,
-                          ),
-                        ),
-                      ),
-                    ),
+                    // Align(
+                    //   alignment: Alignment.topLeft,
+                    //   child: TextButton.icon(
+                    //     onPressed: () {
+                    //       Navigator.pushReplacement(
+                    //         context,
+                    //         MaterialPageRoute(
+                    //             builder: (context) => const DiscoverTab()),
+                    //       );
+                    //     },
+                    //     icon: const Icon(
+                    //       Icons.arrow_back,
+                    //       color: Colors.green,
+                    //     ),
+                    //     label: const Text(
+                    //       'Back',
+                    //       style: TextStyle(
+                    //         color: Colors.black,
+                    //       ),
+                    //     ),
+                    //   ),
+                    // ),
                     const Text(
                       'Want to Travel with Us?',
                       style: TextStyle(

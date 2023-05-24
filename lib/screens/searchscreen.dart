@@ -285,26 +285,29 @@ class _SearchScreenState extends State<SearchScreen> {
         child: ListView(
           padding: EdgeInsets.zero,
           children: [
-            const DrawerHeader(
-              decoration: BoxDecoration(
-                color: Color(0xFF027438),
+            Container(
+              decoration: const BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage('assets/images/icon.png'),
+                  fit: BoxFit.cover,
+                  opacity: 0.8,
+                ),
               ),
-              child: Text(
-                'Filters',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
+              child: const DrawerHeader(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [],
                 ),
               ),
             ),
-             const SizedBox(height: 5),
+            const SizedBox(height: 5),
             ListTile(
               leading: const Icon(
                 Icons.home,
                 size: 30.0,
               ),
-              title: const Text('Home',style: TextStyle( fontWeight: FontWeight.bold)),
+              title: const Text('Home',
+                  style: TextStyle(fontWeight: FontWeight.bold)),
               onTap: () {
                 Navigator.push(
                   context,
@@ -318,11 +321,15 @@ class _SearchScreenState extends State<SearchScreen> {
                 Icons.menu_book_rounded,
                 size: 30.0,
               ),
-              title: const Text('Book',style: TextStyle( fontWeight: FontWeight.bold)),
+              title: const Text('Book',
+                  style: TextStyle(fontWeight: FontWeight.bold)),
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const BookScreen(destination: '',)),
+                  MaterialPageRoute(
+                      builder: (context) => const BookScreen(
+                            destination: '',
+                          )),
                 );
               },
             ),
@@ -332,7 +339,8 @@ class _SearchScreenState extends State<SearchScreen> {
                 Icons.search_rounded,
                 size: 30.0,
               ),
-              title: const Text('Search', style: TextStyle( fontWeight: FontWeight.bold)),
+              title: const Text('Search',
+                  style: TextStyle(fontWeight: FontWeight.bold)),
               onTap: () {
                 Navigator.push(
                   context,
@@ -346,7 +354,8 @@ class _SearchScreenState extends State<SearchScreen> {
                 Icons.logout_outlined,
                 size: 30.0,
               ),
-              title: const Text('Log out',style: TextStyle( fontWeight: FontWeight.bold)),
+              title: const Text('Log out',
+                  style: TextStyle(fontWeight: FontWeight.bold)),
               onTap: () {
                 _logout(context);
               },
