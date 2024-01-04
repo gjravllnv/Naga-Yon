@@ -33,7 +33,7 @@ class _LoginScreenState extends State<LoginScreen> {
       return;
     }
 
-    final url = Uri.parse('http://zz.ncf.edu.ph/public/api/login');
+    final url = Uri.parse('https://ncfnagayon-api.000webhostapp.com/api/nagayon/login');
     final response = await http.post(
       url,
       body: json.encode({
